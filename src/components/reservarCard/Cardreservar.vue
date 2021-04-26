@@ -3,26 +3,29 @@
     <div class="card p-4 text-left shadow-sm p-3 mb-5 bg-white rounded border-top-0">
         <h3 class="title-reservar">RESERVAR</h3>
       <div class="p-2">  
-        <form>
+        <form class="needs-validation">
           <div class=" d-flex justify-content-between ">
             <div class="col-4">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" v-model="nuevoNombre" id="nombre">
+              <input type="text" class="form-control" v-model="nuevoNombre" id="nombre" :state="valida"  >
+                <div class="invalid-feedback">
+                  Please choose a username.
+                </div>
             </div>
             <div class="col-md-3">
               <label for="fecha">Fecha</label>
-              <input type="text" class="form-control" placeholder="30/9/2019" id="fecha" v-model="fechaReserva">
+              <input type="date" class="form-control" placeholder="30/9/2019" id="fecha" v-model="fechaReserva">
             </div>
             <div class="col-md-2">
               <label for="desde" >Desde</label>
-              <input type="text" class="form-control" placeholder="12:00" id="desde" v-model="desdeReserva">
+              <input type="time" class="form-control" placeholder="12:00" id="desde" v-model="desdeReserva">
             </div>
             <div class="col-md-2">
               <label for="hasta">Hasta</label>
-              <input type="text" class="form-control" placeholder="13:00" id="hasta" v-model="hastaReserva">
+              <input type="time" class="form-control" placeholder="13:00" id="hasta" v-model="hastaReserva">
             </div>
             <div class=" my-class-form-control-group ">
-              <button type="button" class="btn btn-success" @click="guardarReserva();limpiarcampo()" >Guardar</button>
+              <button :disabled="!valida" type="button" class="btn btn-success" @click="guardarReserva();limpiarcampo()" >Guardar</button>
             </div>
           </div>
         </form>
@@ -69,7 +72,16 @@ import { mapActions } from 'vuex'
     }
     },
     computed:{
-      ...mapState(['nombresReserva'])
+      ...mapState(['nombresReserva']),
+      
+      valida(){
+        if(this.nuevoNombre && this.fechaReserva && this.desdeReserva && this.hastaReserva){
+          return true
+        }
+        else {
+          return false
+        }
+      }
     }
   }
 
@@ -103,13 +115,11 @@ import { mapActions } from 'vuex'
 
   }   
   button{
-        background: #42a98f;
         padding-left:20px;
         padding-right:20px;
   }
-  placeholder{
-    color:red;
-  }
+  
+
   .my-class-form-control-group{
   display:flex;
   align-items:center;

@@ -13,15 +13,31 @@ export default new Vuex.Store({
       state.nombresReserva.push({
         nuevaReserva
     })
-    console.log(state.nombresReserva);
+    console.log("las reservas",state.nombresReserva[0].nuevaReserva);
     
     },
 
-
     borrarReserva(state,index){
-      console.log(index)
-      state.nombresReserva.splice(index,1);
+      state.nombresReserva[0].nuevaReserva.splice(index,1);
     },
+
+    ordenarReservas(state){
+      var reservas = state.nombresReserva[0].nuevaReserva;
+      console.log("antes",reservas)
+      reservas.sort(function (a, b) {
+        if (a.desde > b.desde) {
+          return 1;
+        }
+        if (a.desde < b.desde) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+
+      console.log(reservas)
+
+    }
   },
   actions: {
 

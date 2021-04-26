@@ -1,24 +1,21 @@
 <template>
-  <div class="ListaNombres">
-              <div class=" my-class-form-control-group ">
-              <button type="button" class="btn btn-success" @click="prueba()" >Guardar</button>
-            </div>
+      <div>
     <table class="table">
       <thead>
         <tr>
           <th class="text-left">Nombre</th>
-          <th class="text-right ">Horario <a href="#s"><i class="material-icons arrowButton ">arrow_upward</i></a></th>
+          <th class="text-right  ">Horario <a href="!#" @click="ordenarReservas()"><i class="material-icons arrowButton ">arrow_upward</i></a></th>
           <th class="text-right accionList">Acción  </th>
         </tr>
       </thead>
-      <tbody v-for="i,index of nombresReserva" >
-      <div v-for="j,index of i"> 
-        <tr v-for="g,index of j">
-          <th class="text-left">{{j[index].nombre}}</th>
-          <td class="text-right horarioList">de {{j[index].desde}} a {{j[index].desde}} </td>
-          <td class="text-right"><a href="#" @click="borrarReserva(index)"><i class="material-icons deleteButton">delete</i></a></td>
-        </tr>
-       </div>  
+        <tbody>
+  
+            <tr v-for="i,index in titledef.nuevaReserva">
+              <th class="text-left">{{i.nombre}}</th>
+              <td class="text-right horarioList">de {{i.desde}} a {{i.hasta}} </td>
+              <td class="text-right"><a href="!#" @click="borrarReserva(index)"><i class="material-icons deleteButton">delete</i></a></td>
+            </tr>
+
       </tbody>
     </table>
     
@@ -38,13 +35,25 @@ export default {
   props: {
   },
   data: () => ({
-    reservasArray:[]
   }),
   computed:{
     ...mapState(['nombresReserva']),
+    titledef:function(){
+        var titles = [];
+      for(var i = 0; i < this.nombresReserva.length; i++){
+          titles.push(this.nombresReserva[i]);
+      }
+      var titlecero = titles[0];
+      var titledef = titlecero;
+
+      return  titledef;
+
+    },
+
   },
   methods:{
-    ...mapMutations(['borrarReserva']),
+    ...mapMutations(['borrarReserva','ordenarReservas']),
+
   }
 }
 </script>
