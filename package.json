@@ -16,7 +16,7 @@
     "vue-router": "^3.2.0",
     "vue-visjs": "^0.4.2",
     "vue-visjs-timeline": "^1.1.0",
-    "vuex": "^3.4.0"
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
