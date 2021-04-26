@@ -1,26 +1,29 @@
 <template>
-      <div>
+  <div>
     <table class="table">
       <thead>
         <tr>
           <th class="text-left">Nombre</th>
-          <th class="text-right  ">Horario <a href="!#" @click="ordenarReservas()"><i class="material-icons arrowButton ">arrow_upward</i></a></th>
+          <th class="text-right ">Horario 
+            <a href="!#" @click="ordenarMenorMayor()" v-if="seleccionado">
+              <i class="material-icons arrowButton" @click="seleccionado = !seleccionado"  data-toggle="tooltip" data-placement="top" title="Ordemar de mayor a menor">arrow_downward</i>
+            </a>
+            <a href="!#" @click="ordenarMayorMenor()" v-if="!seleccionado">
+              <i class="material-icons arrowButton"data-toggle="tooltip" data-placement="top" title="Ordemar de menor a mayor" @click="seleccionado = !seleccionado">arrow_upward</i>
+            </a>
+          </th>
           <th class="text-right accionList">Acción  </th>
         </tr>
       </thead>
         <tbody>
-  
-            <tr v-for="i,index in titledef.nuevaReserva">
-              <th class="text-left">{{i.nombre}}</th>
-              <td class="text-right horarioList">de {{i.desde}} a {{i.hasta}} </td>
-              <td class="text-right"><a href="!#" @click="borrarReserva(index)"><i class="material-icons deleteButton">delete</i></a></td>
-            </tr>
-
+          <tr v-for="i,index in titledef.nuevaReserva">
+            <th class="text-left">{{i.nombre}}</th>
+            <td class="text-right horarioList">de {{i.desde}} a {{i.hasta}} </td>
+            <td class="text-right">
+            <a href="!#" @click="borrarReserva(index)"><i class="material-icons deleteButton">delete</i></a></td>
+          </tr>
       </tbody>
     </table>
-    
-
-
   </div>
 </template>
 
@@ -35,6 +38,7 @@ export default {
   props: {
   },
   data: () => ({
+    seleccionado: false,
   }),
   computed:{
     ...mapState(['nombresReserva']),
@@ -52,7 +56,8 @@ export default {
 
   },
   methods:{
-    ...mapMutations(['borrarReserva','ordenarReservas']),
+    ...mapMutations(['borrarReserva','ordenarMenorMayor','ordenarMayorMenor']),
+
 
   }
 }

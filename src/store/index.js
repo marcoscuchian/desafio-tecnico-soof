@@ -21,22 +21,49 @@ export default new Vuex.Store({
       state.nombresReserva[0].nuevaReserva.splice(index,1);
     },
 
-    ordenarReservas(state){
+    ordenarMenorMayor(state){
       var reservas = state.nombresReserva[0].nuevaReserva;
-      console.log("antes",reservas)
-      reservas.sort(function (a, b) {
+      var reservasDef = reservas.sort(function (a, b) {
         if (a.desde > b.desde) {
           return 1;
         }
         if (a.desde < b.desde) {
           return -1;
         }
-        // a must be equal to b
         return 0;
       });
-
-      console.log(reservas)
-
+      
+      reservasDef.sort(function (a, b) {
+        if (a.fecha > b.fecha) {
+          return 1;
+        }
+        if (a.fecha < b.fecha) {
+          return -1;
+        }
+        return 0;
+      });
+    },
+    ordenarMayorMenor(state){
+      var reservas = state.nombresReserva[0].nuevaReserva;
+      var reservasDef = reservas.sort(function (a, b) {
+        if (a.desde < b.desde) {
+          return 1;
+        }
+        if (a.desde > b.desde) {
+          return -1;
+        }
+        return 0;
+      });
+      
+      reservasDef.sort(function (a, b) {
+        if (a.fecha < b.fecha) {
+          return 1;
+        }
+        if (a.fecha > b.fecha) {
+          return -1;
+        }
+        return 0;
+      });
     }
   },
   actions: {

@@ -25,7 +25,13 @@
               <input type="time" class="form-control" placeholder="13:00" id="hasta" v-model="hastaReserva">
             </div>
             <div class=" my-class-form-control-group ">
-              <button :disabled="!valida" type="button" class="btn btn-success" @click="guardarReserva();limpiarcampo()" >Guardar</button>
+              <button :disabled="!valida" 
+                type="button" 
+                class="btn btn-success" 
+                @click="guardarReserva();limpiarcampo()" 
+                data-toggle="tooltip" data-placement="top" title="Guardar">
+                Guardar
+              </button>
             </div>
           </div>
         </form>
@@ -73,6 +79,7 @@ import { mapActions } from 'vuex'
     },
     computed:{
       ...mapState(['nombresReserva']),
+
       
       valida(){
         if(this.nuevoNombre && this.fechaReserva && this.desdeReserva && this.hastaReserva){
