@@ -1,5 +1,8 @@
 <template>
   <div>
+  <div>
+    <h1 class="agenda text-left">Agenda de Reservas</h1>
+  </div>  
     <table class="table">
       <thead>
         <tr>
@@ -34,7 +37,7 @@ import { mapActions } from 'vuex'
 
 
 export default {
-  name: 'ListaNombres',
+  name: 'ListaReservas',
   props: {
   },
   data: () => ({
@@ -43,14 +46,13 @@ export default {
   computed:{
     ...mapState(['nombresReserva']),
     titledef:function(){
-        var titles = [];
+        var arrayReserva = [];
       for(var i = 0; i < this.nombresReserva.length; i++){
-          titles.push(this.nombresReserva[i]);
+          arrayReserva.push(this.nombresReserva[i]);
       }
-      var titlecero = titles[0];
-      var titledef = titlecero;
+      var arrayReserva = arrayReserva[0];
 
-      return  titledef;
+      return  arrayReserva;
 
     },
 
@@ -74,6 +76,10 @@ export default {
   }
   thead , .horarioList{
     color:#a1a1a1;
+  }
+  .agenda{
+    color: #a1a1a1;
+    font-size: 18px;
   }
   thead{
     border-top: hidden;
